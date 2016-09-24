@@ -10,7 +10,6 @@ string findPangram(vector<char>&);
 int main()
 {
     vector<char> sentence = makeVector(sentence);
-    printVector(sentence);
     string res = findPangram(sentence);
     cout << res << '\n';
     return 0;
@@ -22,6 +21,10 @@ vector<char> makeVector(vector<char>& v)
     char inp = ' ';
     while(cin >> inp)
     {
+        if(int(inp) < 97)
+        {
+            inp += 32;
+        }
         newVector.push_back(inp);
     }
     sort(newVector.begin(), newVector.end());
@@ -40,22 +43,23 @@ void printVector(vector<char>& v)
 string findPangram(vector<char>& v)
 {
     string pan = "not pangram";
-    int asciiUp = 65;
     int asciiLow = 97;
     for(int idx = 0; idx < v.size(); idx++)
     {
-        if(int(v[idx]) == asciiLow || int(v[idx]) == asciiUp)
+        // Don't keep running if remaining indices less than number of letters string must contain.
+        if(((v.size() - 1) - idx) < (122 - asciiLow))
         {
-            asciiUp++;
+            break;
+        }
+        if(int(v[idx]) == asciiLow)
+        {
             asciiLow++;
         }
-        if(asciiUp > 90)
+        if(asciiLow > 122)
         {
             pan = "pangram";
-            return pan;
+            break;
         }
     }
-    return pan;
-    
     return pan;
 }
