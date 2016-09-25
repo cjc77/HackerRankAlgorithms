@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <cctype>
 using namespace std;
 
 void makeVector(vector<char>&);
@@ -11,22 +12,26 @@ int main()
 {
     int tests = 0;
     cin >> tests;
-    for(int i = 0; i < tests; i++)
+    if(cin.get() == '\n')
     {
-        vector<char> v;
-        makeVector(v);
-        long long num = makeIntFromVect(v); 
-        int result = checkDivisibility(v, num);
-        cout << result << '\n';
+        for(int i = 0; i < tests; i++)
+        { 
+            vector<char> v;
+            makeVector(v);
+            long long num = makeIntFromVect(v); 
+            int result = checkDivisibility(v, num);
+            cout << result << '\n';
+        }
     }
 }
 
 void makeVector(vector<char>& v)
 {
-    char inp = ' ';
-    while(cin >> inp)
+    string s = " ";
+    getline(cin, s);
+    for(int i = 0; i < s.size(); i++)
     {
-        v.push_back(inp);
+        v.push_back(s[i]);
     }
 }
 
