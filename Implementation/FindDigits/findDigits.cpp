@@ -23,7 +23,11 @@ int main()
 
 void makeVector(vector<char>& v)
 {
-    cin.getline(v);
+    char inp = ' ';
+    while(cin >> inp)
+    {
+        v.push_back(inp);
+    }
 }
 
 long long makeIntFromVect(vector<char>& v)
