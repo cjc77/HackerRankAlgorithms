@@ -12,16 +12,17 @@ int migratoryBirds(vector<int> arr) {
     map<int, int>::iterator it;
 
     for (int id : arr) {
-        int curId = id;
-        it = popCounts.find(curId);
+        it = popCounts.find(id);
         if (it == popCounts.end())
-            popCounts[curId] = 1;
+            popCounts[id] = 1;
         else
-            popCounts[curId] += 1;
+            popCounts[id] += 1;
     }
     
-    int maxVal = 0;
-    int maxKey = -1;
+    it = popCounts.begin();
+    int maxKey = it->first;
+    int maxVal = it->second;
+    
     for (it = popCounts.begin(); it != popCounts.end(); ++it) {
         if (it->second > maxVal) {
             maxVal = it->second;
